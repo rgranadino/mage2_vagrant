@@ -12,6 +12,6 @@ Usage
 
 Database Info
 -------------------------
-Username: root
-Password: mage2
-DB Name: mage2
+* Username: root
+* Password: mage2
+* DB Name: mage2
