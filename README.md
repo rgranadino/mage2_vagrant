@@ -11,6 +11,7 @@ Usage
 * start up virtual machine: `vagrant up`
 * Point a host name to 192.168.56.10 in /etc/hosts e.g. 192.168.56.10 mage2.dev
 * If all goes well you should see the install screen
+* SSH user info: vagrant/vagrant
 
 Database Info
 -------------------------
