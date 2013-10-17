@@ -23,7 +23,7 @@ File Structure
 -------------------------
 ### Host Machine / Project directory
 * manifests/mage.pp - Puppet manifest file
-* files/ - contains various service configuration files wtf
+* files/ - contains various service configuration files
   * fastcgi.conf - fastcgi configuration
   * site.conf - apache virtual host configuration
   * www.conf - php-fpm pool configuration
