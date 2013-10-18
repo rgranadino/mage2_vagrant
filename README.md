@@ -7,7 +7,7 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 Usage
 -------------------------
 * Clone this repo and `cd` into it
-* Initialize magento2 submodule: `git submodule update --init --recursive`
+* Initialize magento2 submodule: `git submodule update --init`
 * start up virtual machine: `vagrant up`
 * Point a host name to 192.168.56.10 in /etc/hosts e.g. 192.168.56.10 mage2.dev
 * If all goes well you should see the install screen
