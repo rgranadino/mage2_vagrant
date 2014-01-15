@@ -26,6 +26,7 @@ package {[
     'php5-fpm',
     'php5-memcached',
     'php5-mysql',
+    'php5-xdebug',
     ]:
     ensure  => 'latest',
     require => Package['mysql-common']
@@ -81,10 +82,12 @@ service { 'php5-fpm':
     hasrestart => true,
     require    => Package['php5-fpm'],
 }
+
 #files/configuration
 file { '/etc/apache2/sites-enabled/000-default':
     ensure  => 'absent',
-    require => Package['apache2']
+    require => Package['apache2'],
+    notify  => Exec['reload-apache2']
 }
 file { '/etc/apache2/mods-available/fastcgi.conf':
     source  => '/vagrant/files/fastcgi.conf',
@@ -101,6 +104,20 @@ file { '/etc/apache2/sites-enabled/000-mage2':
     require => Package['php5-fpm'],
     notify  => Service['apache2']
 }
+#xdebug ini
+file { '/etc/php5/conf.d/21-xdebug.ini':
+    source  => '/vagrant/files/xdebug.ini',
+    require => Package['php5-xdebug'],
+    notify  => Service['php5-fpm']
+}
+
+#crons
+cron { 'puppetapply':
+      command => 'puppet apply /vagrant/manifests/mage.pp',
+      user    => 'root',
+      minute  => '*/15'
+}
+
 #disable any modules we don't need
 apache2mod { 'deflate': ensure => present }
 apache2mod { 'suexec': ensure => present }
