@@ -27,6 +27,7 @@ package {[
     'php5-memcached',
     'php5-mysql',
     'php5-xdebug',
+    'phpunit',
     ]:
     ensure  => 'latest',
     require => Package['mysql-common']
