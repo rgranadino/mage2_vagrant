@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "https://dl.dropboxusercontent.com/u/86066173/debian-wheezy.box"
+  config.vm.box_url = "https://s3.amazonaws.com/magenation/debian-wheezy.box"
 
 
   config.ssh.username = "vagrant"
