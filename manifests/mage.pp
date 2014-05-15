@@ -64,6 +64,11 @@ exec { 'reload-php5-fpm':
     command     => '/etc/init.d/php5-fpm reload',
     refreshonly => true
 }
+exec { 'remove-local-xml':
+    command     => '/bin/rm /vagrant/data/magento2/app/etc/local.xml',
+    unless      => '/usr/bin/mysqlcheck -uroot -pmage2 mage2 | /bin/grep core_config_data',
+    require     => Exec['create-mage-db']
+}
 #services
 service { 'apache2':
     ensure     => running,
@@ -110,6 +115,30 @@ file { '/etc/php5/conf.d/21-xdebug.ini':
     source  => '/vagrant/files/xdebug.ini',
     require => Package['php5-xdebug'],
     notify  => Service['php5-fpm']
+}
+
+#helper scripts
+file { '/home/vagrant/bin':
+    ensure => 'directory',
+    owner  => 'vagrant',
+    group  => 'vagrant',
+    mode   => 0775
+}
+
+file { '/home/vagrant/bin/reinstall':
+    owner    => 'vagrant',
+    group    => 'vagrant',
+    source   => '/vagrant/files/reinstall.sh',
+    mode     => '0755',
+    require  => File['/home/vagrant/bin']
+}
+
+file { '/home/vagrant/.bash_aliases':
+    owner    => 'vagrant',
+    group    => 'vagrant',
+    source   => '/vagrant/files/bash_aliases',
+    mode     => '0755',
+    require  => File['/home/vagrant/bin']
 }
 
 #crons
