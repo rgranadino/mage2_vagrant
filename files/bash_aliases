@@ -1,1 +1,2 @@
 alias m="cd /vagrant/data/magento2"
+alias mt="m && php dev/tools/tests.php -- type::all"

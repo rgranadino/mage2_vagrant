@@ -28,6 +28,7 @@ package {[
     'php5-mysql',
     'php5-xdebug',
     'phpunit',
+    'php-codesniffer',
     ]:
     ensure  => 'latest',
     require => Package['mysql-common']
