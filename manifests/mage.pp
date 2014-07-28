@@ -51,6 +51,7 @@ exec { 'set-mysql-password':
     unless  => '/usr/bin/mysqladmin -uroot -pmage2 status',
     command => '/usr/bin/mysqladmin -uroot password mage2',
     require => Service['mysql'],
+    notify  => Exec['remove-local-xml'],
 }
 exec { 'create-mage-db':
     unless  => '/usr/bin/mysql -uroot -pmage2 -e "use mage2"',
@@ -67,8 +68,9 @@ exec { 'reload-php5-fpm':
 }
 exec { 'remove-local-xml':
     command     => '/bin/rm /vagrant/data/magento2/app/etc/local.xml',
-    unless      => '/usr/bin/mysqlcheck -uroot -pmage2 mage2 | /bin/grep core_config_data',
-    require     => Exec['create-mage-db']
+    require     => Exec['create-mage-db'],
+    onlyif      => "/usr/bin/test -f /vagrant/data/magento2/app/etc/local.xml",
+    refreshonly => true,
 }
 #services
 service { 'apache2':
