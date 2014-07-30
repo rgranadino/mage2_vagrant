@@ -23,6 +23,12 @@ provision within the guest machine in the event it's not done after updating.
 * `reinstall` - run magento shell uninstall script with the `cleanup_database` flag and run installation again, uses `http://mage2.dev` as base URL
 * `mt` - run bulk magento test suites
 
+#### Apache / FPM Status
+A status vhost on port 88 has been setup to view apache's server status and php-fpm status.
+
+* http://mage2.dev:88/server-status
+* http://mage2.dev:88/fpm-status
+
 ### Database Info
 * Username: root
 * Password: mage2

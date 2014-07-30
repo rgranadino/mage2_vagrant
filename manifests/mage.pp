@@ -113,6 +113,11 @@ file { '/etc/apache2/sites-enabled/000-mage2':
     require => Package['php5-fpm'],
     notify  => Service['apache2']
 }
+file { '/etc/apache2/sites-enabled/001-stats':
+    source  => '/vagrant/files/stats.conf',
+    require => Package['php5-fpm'],
+    notify  => Service['apache2']
+}
 #xdebug ini
 file { '/etc/php5/conf.d/21-xdebug.ini':
     source  => '/vagrant/files/xdebug.ini',
@@ -163,7 +168,7 @@ apache2mod { 'authn_file': ensure => absent }
 apache2mod { 'authz_groupfile': ensure => absent }
 apache2mod { 'authz_user': ensure => absent }
 apache2mod { 'cgid': ensure => absent }
-apache2mod { 'status': ensure => absent }
+apache2mod { 'status': ensure => present}
 
 #wrapper to enable/disable apache modules properly
 define apache2mod ( $ensure = 'present', $require_package = 'apache2' ) {
