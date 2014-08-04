@@ -4,6 +4,7 @@ package {[
     'apache2',
     'apache2-suexec',
     'libapache2-mod-fastcgi',
+    'rsync',
     ]:
     ensure  => 'latest',
     require => Exec['apt-get update']
