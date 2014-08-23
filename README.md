@@ -21,7 +21,7 @@ provision within the guest machine in the event it's not done after updating.
 #### Shell Aliases / Scripts
 * `m` - cd into the base magento directory: /vagrant/data/magento2
 * `reinstall` - run magento shell uninstall script with the `cleanup_database` flag and run installation again, uses `http://mage2.dev` as base URL
-** `reinstall -s` - install magento with sample data
+ * `reinstall -s` - install magento with sample data
 * `mt` - run bulk magento test suites
 
 #### Apache / FPM Status
