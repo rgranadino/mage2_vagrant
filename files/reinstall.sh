@@ -32,7 +32,7 @@ php -f dev/shell/install.php -- --uninstall --cleanup_database 1
 echo "Installing..."
 if [[ -n $SAMPLE_DATA ]]
 then
-   echo "Installing Sampling data..."
+   echo "Installing sample data..."
    mysql -uroot -pmage2 mage2 < /vagrant/data/m2-sample-data/m2sample.sql
    rsync -crt /vagrant/data/m2-sample-data/pub/ /vagrant/data/magento2/pub/
 fi
