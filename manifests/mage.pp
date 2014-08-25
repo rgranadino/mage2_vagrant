@@ -1,3 +1,28 @@
+stage { 'first':
+    before => Stage['main']
+}
+class dotdeb {
+    file { '/etc/apt/sources.list':
+        source  => '/vagrant/files/apt.sources.list',
+        owner   => 'root',
+        group   => 'root'
+    }
+    exec { 'apt-get update':
+         command     => '/usr/bin/apt-get update',
+         subscribe   => File['/etc/apt/sources.list'],
+    }
+    exec { "Import dotdeb to apt keystore":
+        path        => '/bin:/usr/bin',
+        environment => 'HOME=/root',
+        command     => "wget -O - dotdeb.org/dotdeb.gpg | apt-key add -",
+        user        => 'root',
+        group       => 'root',
+        unless      => "apt-key list | grep dotdeb",
+    }
+}
+class { 'dotdeb':
+  stage   => 'first'
+}
 #packages
 package {[
     'vim',
@@ -41,13 +66,7 @@ package {[
     ensure => 'absent'
 }
 #executables
-exec { 'apt-get update':
-    command  => '/usr/bin/apt-get update',
-    require  => Exec['add-non-free']
-}
-exec {'add-non-free':
-    command => '/bin/sed -e \'s/deb http.* wheezy main$/& non-free/\' -i /etc/apt/sources.list'
-}
+
 exec { 'set-mysql-password':
     unless  => '/usr/bin/mysqladmin -uroot -pmage2 status',
     command => '/usr/bin/mysqladmin -uroot password mage2',
@@ -120,7 +139,7 @@ file { '/etc/apache2/sites-enabled/001-stats':
     notify  => Service['apache2']
 }
 #xdebug ini
-file { '/etc/php5/conf.d/21-xdebug.ini':
+file { '/etc/php5/fpm/conf.d/21-xdebug.ini':
     source  => '/vagrant/files/xdebug.ini',
     require => Package['php5-xdebug'],
     notify  => Service['php5-fpm']
