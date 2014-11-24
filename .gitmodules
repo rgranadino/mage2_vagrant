@@ -4,3 +4,9 @@
 [submodule "data/m2-sample-data"]
 	path = data/m2-sample-data
 	url = https://github.com/tzyganu/m2-sample-data
+[submodule "puppet_modules/composer"]
+	path = puppet_modules/composer
+	url = git://github.com/willdurand/puppet-composer.git
+[submodule "puppet_modules/wget"]
+	path = puppet_modules/wget
+	url = git://github.com/maestrodev/puppet-wget.git

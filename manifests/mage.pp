@@ -65,6 +65,10 @@ package {[
     ]:
     ensure => 'absent'
 }
+class { 'composer':
+  command_name => 'composer',
+  target_dir   => '/usr/local/bin'
+}
 #executables
 
 exec { 'set-mysql-password':
@@ -141,7 +145,7 @@ file { '/etc/apache2/sites-enabled/001-stats':
 #xdebug ini
 file { '/etc/php5/fpm/conf.d/21-xdebug.ini':
     source  => '/vagrant/files/xdebug.ini',
-    require => Package['php5-xdebug'],
+    require => Package['php5-fpm', 'php5-xdebug'],
     notify  => Service['php5-fpm']
 }
 
