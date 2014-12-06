@@ -26,9 +26,14 @@ done
 
 cd /vagrant/data/magento2
 rm -rf var/*
+rm composer.lock
+composer install
+cd setup
+rm composer.lock
+composer install
 export MAGE_MODE='developer'
 echo "Uninstalling..."
-php -f dev/shell/install.php -- --uninstall --cleanup_database 1
+php -f index.php -- uninstall
 echo "Installing..."
 if [[ -n $SAMPLE_DATA ]]
 then
@@ -36,25 +41,21 @@ then
    mysql -uroot -pmage2 mage2 < /vagrant/data/m2-sample-data/m2sample.sql
    rsync -crt /vagrant/data/m2-sample-data/pub/ /vagrant/data/magento2/pub/
 fi
-php -f dev/shell/install.php -- \
-  --license_agreement_accepted "yes" \
-  --locale "en_US" \
-  --timezone "America/Los_Angeles" \
-  --default_currency "USD" \
-  --db_host "localhost" \
-  --db_name "mage2" \
-  --db_user "root" \
-  --db_pass "mage2" \
-  --url "http://mage2.dev" \
-  --use_rewrites "yes" \
-  --use_secure_admin "no" \
-  --use_secure "no" \
-  --secure_base_url "http://mage2.dev" \
-  --admin_lastname "mage2" \
-  --admin_firstname "mage2" \
-  --admin_email "foo@test.com" \
-  --admin_username "admin" \
-  --admin_password "p4ssw0rd" \
-  --skip_url_validation "yes" \
-  --session_save db
+php -f index.php -- install \
+  --currency="USD" \
+  --db_host="localhost" \
+  --db_name="mage2" \
+  --db_user="root" \
+  --db_pass="mage2" \
+  --base_url="http://mage2.dev" \
+  --use_rewrites="yes" \
+  --use_secure_admin="no" \
+  --use_secure="no" \
+  --base_url_secure="http://mage2.dev" \
+  --admin_lastname="mage2" \
+  --admin_firstname="mage2" \
+  --admin_email="foo@test.com" \
+  --admin_username="admin" \
+  --admin_password="p4ssw0rd" \
+  --session_save=db
 cd -
