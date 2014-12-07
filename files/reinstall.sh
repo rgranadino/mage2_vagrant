@@ -42,7 +42,6 @@ then
    rsync -crt /vagrant/data/m2-sample-data/pub/ /vagrant/data/magento2/pub/
 fi
 php -f index.php install \
-  --cleanup_database \
   --db_host="localhost" \
   --db_name="mage2" \
   --db_user="root" \
