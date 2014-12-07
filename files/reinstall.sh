@@ -41,21 +41,25 @@ then
    mysql -uroot -pmage2 mage2 < /vagrant/data/m2-sample-data/m2sample.sql
    rsync -crt /vagrant/data/m2-sample-data/pub/ /vagrant/data/magento2/pub/
 fi
-php -f index.php -- install \
-  --currency="USD" \
+php -f index.php install \
+  --cleanup_database \
   --db_host="localhost" \
   --db_name="mage2" \
   --db_user="root" \
   --db_pass="mage2" \
+  --backend_frontname=admin \
   --base_url="http://mage2.dev" \
-  --use_rewrites="yes" \
-  --use_secure_admin="no" \
-  --use_secure="no" \
-  --base_url_secure="http://mage2.dev" \
+  --language=en_US \
+  --currency="USD" \
+  --timezone=America/Los_Angeles \
   --admin_lastname="mage2" \
   --admin_firstname="mage2" \
   --admin_email="foo@test.com" \
   --admin_username="admin" \
   --admin_password="p4ssw0rd" \
+  --use_secure=0 \
+  --use_rewrites="yes" \
+  --use_secure_admin=0 \
+  --base_url_secure="http://mage2.dev" \
   --session_save=db
 cd -
