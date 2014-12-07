@@ -150,8 +150,7 @@ file { '/etc/php5/fpm/conf.d/21-xdebug.ini':
 }
 file { '/etc/php5/cli/conf.d/21-xdebug.ini':
     source  => '/vagrant/files/xdebug.ini',
-    require => Package['php5-fpm', 'php5-xdebug'],
-    notify  => Service['php5-fpm']
+    require => Package['php5-cli', 'php5-xdebug']
 }
 
 #helper scripts
