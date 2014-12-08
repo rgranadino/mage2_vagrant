@@ -30,6 +30,7 @@ package {[
     'apache2-suexec',
     'libapache2-mod-fastcgi',
     'rsync',
+    'htop',
     ]:
     ensure  => 'latest',
     require => Exec['apt-get update']
@@ -141,6 +142,14 @@ file { '/etc/apache2/sites-enabled/001-stats':
     source  => '/vagrant/files/stats.conf',
     require => Package['php5-fpm'],
     notify  => Service['apache2']
+}
+file { '/var/www/info.php':
+    source  => '/vagrant/files/info.php',
+    require => Package['apache2']
+}
+file { '/var/www/opcache.php':
+    source  => '/vagrant/files/opcache.php',
+    require => Package['apache2']
 }
 #xdebug ini
 file { '/etc/php5/fpm/conf.d/21-xdebug.ini':
