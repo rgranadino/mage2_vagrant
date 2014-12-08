@@ -29,6 +29,8 @@ A status vhost on port 88 has been setup to view apache's server status and php-
 
 * http://mage2.dev:88/server-status
 * http://mage2.dev:88/fpm-status
+* http://mage2.dev:88/info.php
+* http://mage2.dev:88/opcache.php
 
 ### Database Info
 * Username: root
