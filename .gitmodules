@@ -10,3 +10,6 @@
 [submodule "puppet_modules/wget"]
 	path = puppet_modules/wget
 	url = git://github.com/maestrodev/puppet-wget.git
+[submodule "data/webgrind"]
+	path = data/webgrind
+	url = git@github.com:jokkedk/webgrind.git
