@@ -1,5 +1,5 @@
 ## Magento2 Vagrant Box
-A simple way to get magento2 up and running. It consists of a Debian Wheezy box provised via Puppet. It will install apache2 +fastcgi, php, php-fpm, mysql and any other necessary dependancies. 
+A simple way to get magento2 up and running. It consists of a Debian Wheezy box provised via Puppet. The provider is Virtual Box. It will install apache2 +fastcgi, php, php-fpm, mysql and any other necessary dependancies. 
 
 The Magento 2 repository is a git submodule and can be edited/explored from the host machine. It is accessed by the guest via shared directories.
 
@@ -24,13 +24,14 @@ provision within the guest machine in the event it's not done after updating.
  * `reinstall -s` - install magento with sample data
 * `mt` - run bulk magento test suites
 
-#### Apache / FPM Status
-A status vhost on port 88 has been setup to view apache's server status and php-fpm status.
+#### Status and Debug utilities
+A status vhost on port 88 has been setup to view apache's server status, php-fpm status as well as some other utilities.
 
 * http://mage2.dev:88/server-status
 * http://mage2.dev:88/fpm-status
 * http://mage2.dev:88/info.php
 * http://mage2.dev:88/opcache.php
+* http://mage2.dev::88/webgrind
 
 ### Database Info
 * Username: root
