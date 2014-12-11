@@ -31,6 +31,8 @@ package {[
     'libapache2-mod-fastcgi',
     'rsync',
     'htop',
+    'python',
+    'graphviz'
     ]:
     ensure  => 'latest',
     require => Exec['apt-get update']
@@ -116,7 +118,10 @@ service { 'php5-fpm':
     hasrestart => true,
     require    => Package['php5-fpm'],
 }
-
+file { '/usr/local/bin/dot':
+    ensure => 'link',
+    target => '/usr/bin/dot'
+}
 #files/configuration
 file { '/etc/apache2/sites-enabled/000-default':
     ensure  => 'absent',
