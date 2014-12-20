@@ -32,7 +32,8 @@ package {[
     'rsync',
     'htop',
     'python',
-    'graphviz'
+    'graphviz',
+    'mysqltuner',
     ]:
     ensure  => 'latest',
     require => Exec['apt-get update']
