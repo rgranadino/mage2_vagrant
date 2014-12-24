@@ -15,7 +15,7 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 1. From the host machine run `git pull && git submodule update --init && vagrant provision`. 
   * If there is an update to the *manifests/mage.pp* or *files/** files it is recommended to provision the guest machine. This can be done by running: `vagrant provision`. There is also a cron that runs every 15 minutes to 
 provision within the guest machine in the event it's not done after updating. 
-2. If you want to start from a clean slate run: `reinstall` from within the guest machine. This will uninstall the application and reinstall it from scracth.
+2. If you want to start from a clean slate run: `reinstall` from within the guest machine. This will uninstall the application and reinstall it from scratch.
 
 
 #### Shell Aliases / Scripts
@@ -31,7 +31,7 @@ A status vhost on port 88 has been setup to view apache's server status, php-fpm
 * http://mage2.dev:88/fpm-status
 * http://mage2.dev:88/info.php
 * http://mage2.dev:88/opcache.php
-* http://mage2.dev::88/webgrind
+* http://mage2.dev:88/webgrind
 
 ### Database Info
 * Username: root
