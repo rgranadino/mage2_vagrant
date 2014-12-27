@@ -26,7 +26,6 @@ done
 
 cd /vagrant/data/magento2
 rm -rf var/*
-rm composer.lock
 composer install
 cd setup
 rm composer.lock
