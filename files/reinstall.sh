@@ -27,6 +27,7 @@ done
 cd /vagrant/data/magento2
 rm -rf var/*
 composer install
+cd setup
 export MAGE_MODE='developer'
 echo "Uninstalling..."
 php -f index.php -- uninstall
