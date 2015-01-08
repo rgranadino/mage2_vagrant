@@ -44,6 +44,12 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
 
+  if Vagrant::Util::Platform.windows?
+    config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777", "fmode=777"]
+  else
+    config.vm.synced_folder ".", "/vagrant", :nfs => { :mount_options => ["dmode=777", "fmode=777"] }
+  end
+
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
