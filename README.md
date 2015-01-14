@@ -8,8 +8,9 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 1. Clone this repo and `cd` into it
 2. Initialize magento2 submodule: `git submodule update --init`
 3. start up virtual machine: `vagrant up`
-4. Point a host name to 192.168.56.10 in /etc/hosts `echo '192.168.56.10 mage2.dev' >> /etc/hosts'`
-5. Once the machine completes provisioning then it can be installed by going to 'http://mage2.dev' or via ssh by running: `reinstall`
+4. Point a host name to 192.168.56.10 in /etc/hosts `echo '192.168.56.10 mage2.dev' >> /etc/hosts`
+5. Once the machine completes provisioning, SSH to the server and install using composer `vagrant ssh; cd /vagrant/data/magento2; composer install;`
+6. Install by going to 'http://mage2.dev' or via ssh by running: `reinstall`
 
 #### Updating
 1. From the host machine run `git pull && git submodule update --init && vagrant provision`. 
