@@ -34,6 +34,7 @@ package {[
     'python',
     'graphviz',
     'mysqltuner',
+    'nfs-common',
     ]:
     ensure  => 'latest',
     require => Exec['apt-get update']
