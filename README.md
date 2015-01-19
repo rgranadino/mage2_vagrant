@@ -34,6 +34,10 @@ A status vhost on port 88 has been setup to view apache's server status, php-fpm
 * http://mage2.dev:88/opcache.php
 * http://mage2.dev:88/webgrind
 
+### Magento Admin User
+* Username: admin
+* Password: p4ssw0rd
+
 ### Database Info
 * Username: root
 * Password: mage2
