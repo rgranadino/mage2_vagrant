@@ -1,9 +1,6 @@
 [submodule "data/magento2"]
 	path = data/magento2
 	url = https://github.com/magento/magento2
-[submodule "data/m2-sample-data"]
-	path = data/m2-sample-data
-	url = https://github.com/tzyganu/m2-sample-data
 [submodule "puppet_modules/composer"]
 	path = puppet_modules/composer
 	url = git://github.com/willdurand/puppet-composer.git
