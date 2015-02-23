@@ -53,6 +53,8 @@ php -f index.php install \
   --base_url_secure="http://mage2.dev/" \
   --session_save=files
 
+cd -
+
 if [[ -n $SAMPLE_DATA ]]
 then
   echo "Installing sample data..."
@@ -61,5 +63,4 @@ then
   php -f dev/tools/Magento/Tools/SampleData/install.php -- --admin_username=admin
 fi
 
-cd -
 
