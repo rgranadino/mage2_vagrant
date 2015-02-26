@@ -2,9 +2,6 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "mage2_dev"
@@ -48,6 +45,11 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777", "fmode=777"]
   else
     config.vm.synced_folder ".", "/vagrant", :nfs => { :mount_options => ["dmode=777", "fmode=777"] }
+    
+    #rsync_args = ['--verbose', '--archive', '-z']
+    #config.vm.synced_folder ".", "/vagrant",
+    #  rsync__args: rsync_args, rsync__exclude: ['.vagrant/'], rsync__auto: true, type: 'rsync'
+    
   end
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests

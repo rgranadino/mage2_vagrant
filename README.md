@@ -10,7 +10,7 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 3. start up virtual machine: `vagrant up`
 4. Point a host name to 192.168.56.10 in /etc/hosts `echo '192.168.56.10 mage2.dev' >> /etc/hosts`
 5. Once the machine completes provisioning, SSH to the server and install using composer `vagrant ssh; cd /vagrant/data/magento2; composer install;`
-6. Install by going to 'http://mage2.dev' or via ssh by running: `reinstall`
+6. Install by going to 'http://mage2.dev' or via ssh by running: `reinstall` (or `reinstall -s` to also install the sample data)
 
 #### Updating
 1. From the host machine run `git pull && git submodule update --init && vagrant provision`. 
@@ -36,7 +36,7 @@ A status vhost on port 88 has been setup to view apache's server status, php-fpm
 
 ### Magento Admin User
 * Username: admin
-* Password: p4ssw0rd
+* Password: password123
 
 ### Database Info
 * Username: root
