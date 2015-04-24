@@ -26,17 +26,19 @@ done
 
 cd /vagrant/data/magento2
 rm -rf var/*
+
 composer install
-cd setup
 export MAGE_MODE='developer'
+
 echo "Uninstalling..."
-php -f index.php -- uninstall
+php -f bin/magento setup:uninstall -n
+
 echo "Installing..."
-php -f index.php install \
+php -f bin/magento setup:install \
   --db_host="localhost" \
   --db_name="mage2" \
   --db_user="root" \
-  --db_pass="mage2" \
+  --db_password="mage2" \
   --backend_frontname=admin \
   --base_url="http://mage2.dev/" \
   --language=en_US \
@@ -45,7 +47,7 @@ php -f index.php install \
   --admin_lastname="mage2" \
   --admin_firstname="mage2" \
   --admin_email="foo@test.com" \
-  --admin_username="admin" \
+  --admin_user="admin" \
   --admin_password="password123" \
   --use_secure=0 \
   --use_rewrites="yes" \
