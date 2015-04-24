@@ -1,4 +1,5 @@
 #!/bin/bash
+
 usage()
 {
 cat << EOF
@@ -11,6 +12,7 @@ OPTONS:
     -h Show this message
 EOF
 }
+
 SAMPLE_DATA=
 while getopts "hs" o; do
     case "${o}" in
