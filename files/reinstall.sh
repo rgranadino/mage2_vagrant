@@ -63,7 +63,7 @@ if [[ -n $SAMPLE_DATA ]]
 then
   echo "Installing sample data..."
   composer config repositories.magento composer http://packages.magento.com
-  composer require magento/sample-data:0.74.0-beta6 --dev
+  composer require magento/sample-data:0.74.0-beta7 --dev
   php -f dev/tools/Magento/Tools/SampleData/install.php -- --admin_user=admin
 fi
 
