@@ -70,6 +70,7 @@ package { [
   'php5-fpm',
   'php5-memcached',
   'php5-mysql',
+  'php5-xsl',
   'php5-xdebug',
   'phpunit',
   'php-codesniffer',

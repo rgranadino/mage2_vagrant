@@ -56,7 +56,6 @@ php -f bin/magento setup:install \
   --use-secure-admin=0 \
   --session-save=files
 
-cd -
 
 if [[ -n $SAMPLE_DATA ]]
 then
@@ -66,4 +65,5 @@ then
   php -f dev/tools/Magento/Tools/SampleData/install.php -- --admin_user=admin
 fi
 
-
+#change directory back to where user ran script
+cd -
