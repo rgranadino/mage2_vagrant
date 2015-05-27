@@ -61,8 +61,9 @@ if [[ -n $SAMPLE_DATA ]]
 then
   echo "Installing sample data..."
   composer config repositories.magento composer http://packages.magento.com
-  composer require magento/sample-data:0.74.0-beta9 --dev
-  php -f dev/tools/Magento/Tools/SampleData/install.php -- --admin_user=admin
+  composer require magento/sample-data:0.74.0-beta10 --dev
+  php -f bin/magento sampledata:install admin
+  php -f bin/magento setup:upgrade
 fi
 
 #change directory back to where user ran script
