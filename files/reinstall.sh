@@ -62,6 +62,7 @@ then
   echo "Installing sample data..."
   composer config repositories.magento composer http://packages.magento.com
   composer require magento/sample-data:0.74.0-beta12 --dev
+  rm -rf var/*
   php -f bin/magento sampledata:install admin
   php -f bin/magento setup:upgrade
 fi
