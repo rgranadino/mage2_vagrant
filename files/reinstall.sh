@@ -29,43 +29,46 @@ done
 cd /vagrant/data/magento2
 rm -rf var/*
 
+echo "[+] Composer..."
 composer install
-export MAGE_MODE='developer'
 
-echo "Uninstalling..."
+if [[ -n $SAMPLE_DATA ]]; then
+    composer config repositories.magento composer http://packages.magento.com
+    composer require magento/sample-data:0.74.0-beta16 --dev
+fi
+
+export MAGE_MODE='developer'
+chmod +x bin/magento
+
+echo "[+] Uninstalling..."
 php -f bin/magento setup:uninstall -n
 
-echo "Installing..."
-php -f bin/magento setup:install \
-  --db-host="localhost" \
-  --db-name="mage2" \
-  --db-user="root" \
-  --db-password="mage2" \
+echo "[+] Installing..."
+install_cmd="./bin/magento setup:install \
+  --db-host='localhost' \
+  --db-name='mage2' \
+  --db-user='root' \
+  --db-password='mage2' \
   --backend-frontname=admin \
-  --base-url="http://mage2.dev/" \
+  --base-url='http://mage2.dev/' \
   --language=en_US \
-  --currency="USD" \
+  --currency='USD' \
   --timezone=America/Los_Angeles \
-  --admin-lastname="mage2" \
-  --admin-firstname="mage2" \
-  --admin-email="foo@test.com" \
-  --admin-user="admin" \
-  --admin-password="password123" \
+  --admin-lastname='mage2' \
+  --admin-firstname='mage2' \
+  --admin-email='foo@test.com' \
+  --admin-user='admin' \
+  --admin-password='password123' \
   --use-secure=0 \
   --use-rewrites=1 \
   --use-secure-admin=0 \
-  --session-save=files
+  --session-save=files"
 
-
-if [[ -n $SAMPLE_DATA ]]
-then
-  echo "Installing sample data..."
-  composer config repositories.magento composer http://packages.magento.com
-  composer require magento/sample-data:0.74.0-beta14 --dev
-  rm -rf var/*
-  php -f bin/magento sampledata:install admin
-  php -f bin/magento setup:upgrade
+if [[ -n $SAMPLE_DATA ]]; then
+    install_cmd="${install_cmd} --use-sample-data"
 fi
+
+eval ${install_cmd}
 
 #change directory back to where user ran script
 cd -
