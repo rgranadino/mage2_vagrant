@@ -34,7 +34,7 @@ composer install
 
 if [[ -n $SAMPLE_DATA ]]; then
     composer config repositories.magento composer http://packages.magento.com
-    composer require magento/sample-data:0.74.0-beta16 --dev
+    composer require magento/sample-data:1.0.0-beta --dev
 fi
 
 export MAGE_MODE='developer'
