@@ -1,5 +1,5 @@
 ## Magento2 Vagrant Box
-A simple way to get magento2 up and running. It consists of a Debian Wheezy box provised via Puppet. The provider is Virtual Box. It will install apache2 +fastcgi, php, php-fpm, mysql and any other necessary dependancies. 
+A simple way to get magento2 up and running. It consists of a Debian Wheezy box provised via Puppet. The provider is Virtual Box. It will install apache2 +fastcgi, php, php-fpm, mysql and any other necessary dependancies.
 
 The Magento 2 repository is a git submodule and can be edited/explored from the host machine. It is accessed by the guest via shared directories.
 
@@ -9,13 +9,14 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 2. Initialize magento2 submodule: `git submodule update --init`
 3. start up virtual machine: `vagrant up`
 4. Point a host name to 192.168.56.10 in /etc/hosts `echo '192.168.56.10 mage2.dev' >> /etc/hosts`
+>NOTE: Some composer dependancies require git. Agent Forwarding over SSH is enabled in the Vagrant file but you must have `ssh-agent` running and your key added. Running `ssh-add` should add the default key to the identities list, which presumably is the same key used to access github/bitbucket.
 5. Once the machine completes provisioning, SSH to the server and install using composer `vagrant ssh; cd /vagrant/data/magento2; composer install;`
-6. Install by going to 'http://mage2.dev' or via ssh by running: `reinstall` (or `reinstall -s` to also install the sample data)
+6. Install by going to 'http://mage2.dev/setup' or via ssh by running: `reinstall` (or `reinstall -s` to also install the sample data)
 
 #### Updating
-1. From the host machine run `git pull && git submodule update --init && vagrant provision`. 
-  * If there is an update to the *manifests/mage.pp* or *files/** files it is recommended to provision the guest machine. This can be done by running: `vagrant provision`. There is also a cron that runs every 15 minutes to 
-provision within the guest machine in the event it's not done after updating. 
+1. From the host machine run `git pull && git submodule update --init && vagrant provision`.
+  * If there is an update to the *manifests/mage.pp* or *files/** files it is recommended to provision the guest machine. This can be done by running: `vagrant provision`. There is also a cron that runs every 15 minutes to
+provision within the guest machine in the event it's not done after updating.
 2. If you want to start from a clean slate run: `reinstall` from within the guest machine. This will uninstall the application and reinstall it from scratch.
 
 
@@ -45,7 +46,7 @@ A status vhost on port 88 has been setup to view apache's server status, php-fpm
 
 ### SSH Info
 * username: vagrant
-* password: vagrant 
+* password: vagrant
 
 It's also possible to use `vagrant ssh` from within the project directory
 
@@ -60,9 +61,8 @@ It's also possible to use `vagrant ssh` from within the project directory
   * site.conf - apache virtual host configuration
   * www.conf - php-fpm pool configuration
   * xdebug.ini - php xdebug configuration file
-* data/magento2 - git submodule to magento2 github repository. 
-  
- 
+* data/magento2 - git submodule to magento2 github repository.
+
+
 ### Guest Machine
 * /vagrant/data/magento2 - Apache Document Root
-

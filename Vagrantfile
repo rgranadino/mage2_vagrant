@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
 
   config.ssh.username = "vagrant"
   config.vm.hostname = "mage2.dev"
+  config.ssh.forward_agent = "true"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.

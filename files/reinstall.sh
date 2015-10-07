@@ -28,6 +28,7 @@ done
 
 cd /vagrant/data/magento2
 rm -rf var/*
+rm var/.maintenance.flag
 
 echo "[+] Composer..."
 composer install
