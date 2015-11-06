@@ -10,8 +10,15 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 3. start up virtual machine: `vagrant up`
 4. Point a host name to 192.168.56.10 in /etc/hosts `echo '192.168.56.10 mage2.dev' >> /etc/hosts`
 >NOTE: Some composer dependancies require git. Agent Forwarding over SSH is enabled in the Vagrant file but you must have `ssh-agent` running and your key added. Running `ssh-add` should add the default key to the identities list, which presumably is the same key used to access github/bitbucket. You'll may also need to create a API access token in github, instructions can be found [here](http://devdocs.magento.com/guides/v2.0/install-gde/trouble/git/tshoot_rate-limit.html): 
-5. Once the machine completes provisioning, SSH to the server and install using composer `vagrant ssh; cd /vagrant/data/magento2; composer install;`
-6. Install by going to 'http://mage2.dev/setup' or via ssh by running: `reinstall` (or `reinstall -s` to also install the sample data)
+5. Once the machine completes provisioning, SSH to the server (`vagrant ssh`) and install Magento 2 by running:
+
+ * Via CLI (recommended)
+
+   * `reinstall` (Magento **without** sample data) or `reinstall -s` (Magento **with** sample data).
+
+ * Via Web Installer
+
+   * Please go to the Magento directory within the vagrant box (`cd /vagrant/data/magento2/`) and run `composer install`. Then open 'http://mage2.dev/setup' in your browser and go through the installation process.
 
 #### Updating
 1. From the host machine run `git pull && git submodule update --init && vagrant provision`.
@@ -61,8 +68,8 @@ It's also possible to use `vagrant ssh` from within the project directory
   * site.conf - apache virtual host configuration
   * www.conf - php-fpm pool configuration
   * xdebug.ini - php xdebug configuration file
-* data/magento2 - git submodule to magento2 github repository.
-
+* data/magento2 - Git submodule to Magento2 Github repository: https://github.com/magento/magento2
+* data/magento2-sample-data - Git submodule to Magento2 Sample Data Github repository: https://github.com/magento/magento2-sample-data
 
 ### Guest Machine
 * /vagrant/data/magento2 - Apache Document Root
