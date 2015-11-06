@@ -10,7 +10,6 @@ Vagrant.configure("2") do |config|
   # doesn't already exist on the user's system.
   config.vm.box_url = "https://s3.amazonaws.com/magenation/debian-wheezy.box"
 
-
   config.ssh.username = "vagrant"
   config.vm.hostname = "mage2.dev"
   config.ssh.forward_agent = "true"
@@ -46,11 +45,11 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777", "fmode=777"]
   else
     config.vm.synced_folder ".", "/vagrant", :nfs => { :mount_options => ["dmode=777", "fmode=777"] }
-    
+
     #rsync_args = ['--verbose', '--archive', '-z']
     #config.vm.synced_folder ".", "/vagrant",
     #  rsync__args: rsync_args, rsync__exclude: ['.vagrant/'], rsync__auto: true, type: 'rsync'
-    
+
   end
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests

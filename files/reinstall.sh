@@ -30,13 +30,13 @@ cd /vagrant/data/magento2
 rm -rf var/*
 rm var/.maintenance.flag
 
+if [[ -n $SAMPLE_DATA ]]; then
+    echo "[+] Install sample data"
+    php -f /vagrant/data/magento2-sample-data/dev/tools/build-sample-data.php -- --ce-source="/vagrant/data/magento2/"
+fi
+
 echo "[+] Composer..."
 composer install
-
-if [[ -n $SAMPLE_DATA ]]; then
-    composer config repositories.magento composer http://packages.magento.com
-    composer require magento/sample-data:1.0.0-beta --dev
-fi
 
 export MAGE_MODE='developer'
 chmod +x bin/magento
@@ -64,10 +64,6 @@ install_cmd="./bin/magento setup:install \
   --use-rewrites=1 \
   --use-secure-admin=0 \
   --session-save=files"
-
-if [[ -n $SAMPLE_DATA ]]; then
-    install_cmd="${install_cmd} --use-sample-data"
-fi
 
 eval ${install_cmd}
 

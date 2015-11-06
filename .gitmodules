@@ -10,3 +10,6 @@
 [submodule "data/webgrind"]
 	path = data/webgrind
 	url = git://github.com/jokkedk/webgrind.git
+[submodule "data/magento2-sample-data"]
+	path = data/magento2-sample-data
+	url = https://github.com/magento/magento2-sample-data.git
