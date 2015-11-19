@@ -5,9 +5,10 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 
 ### Usage
 #### Installation
-1. Clone this repo and `cd` into it
-2. Initialize magento2 submodule: `git submodule update --init`
-3. start up virtual machine: `vagrant up`
+1. Clone this repository: `git clone --recursive https://github.com/rgranadino/mage2_vagrant.git`
+2. Navigate into the repository via `cd`
+2. **IMPORTANT**: If you cloned the repository without the *--recursive* param, you need to initialize the required submodules: `git submodule update --init --recursive`
+3. Start up virtual machine: `vagrant up`
 4. Point a host name to 192.168.56.10 in /etc/hosts `echo '192.168.56.10 mage2.dev' >> /etc/hosts`
 >NOTE: Some composer dependancies require git. Agent Forwarding over SSH is enabled in the Vagrant file but you must have `ssh-agent` running and your key added. Running `ssh-add` should add the default key to the identities list, which presumably is the same key used to access github/bitbucket. You'll may also need to create a API access token in github, instructions can be found [here](http://devdocs.magento.com/guides/v2.0/install-gde/trouble/git/tshoot_rate-limit.html): 
 5. Once the machine completes provisioning, SSH to the server (`vagrant ssh`).
