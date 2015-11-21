@@ -12,21 +12,23 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 4. Point a host name to 192.168.56.10 in /etc/hosts `echo '192.168.56.10 mage2.dev' >> /etc/hosts`
 >NOTE: Some composer dependancies require git. Agent Forwarding over SSH is enabled in the Vagrant file but you must have `ssh-agent` running and your key added. Running `ssh-add` should add the default key to the identities list, which presumably is the same key used to access github/bitbucket. You'll may also need to create a API access token in github, instructions can be found [here](http://devdocs.magento.com/guides/v2.0/install-gde/trouble/git/tshoot_rate-limit.html): 
 5. Once the machine completes provisioning, SSH to the server (`vagrant ssh`).
-6. Add your Magento Connect login credentials to the global composer auth.json:
+6. Add your Magento Connect authentication credentials to the global composer auth.json:
 
   * Open or create the file `~/.composer/auth.json`
-  * Add the Magento Connect login credentials:
+  * Add the Magento Connect authentication credentials (if you don't have any, please check [here](http://devdocs.magento.com/guides/v2.0/install-gde/prereq/connect-auth.html) on how to create them):
 
   ```json
   {
       "http-basic": {
           "repo.magento.com": {
-              "username": "MAGENTO_USER",
-              "password": "MAGENTO_PASS"
+              "username": "<public key>",
+              "password": "<private key>"
           }
       }
   }
   ```
+  
+ * Or you can use the composer config command: `composer.phar global config http-basic.repo.magento.com <public_key> <private_key>`
 
 7. Install Magento 2 by running:
 
