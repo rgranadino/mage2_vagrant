@@ -43,7 +43,7 @@ Install the following before proceeding through installation. This may require a
    cd /vagrant/data/magento2; # This is the document root
    composer install -v;
    ```
-   * If you did not set your ~/.composer/auth.json file, you will be prompted for credentials to repo.magento.com. Hit ctrl+C to cancel and go back to step 7.
+   * If you did not set your ~/.composer/auth.json file, you will be prompted for credentials to repo.magento.com. Hit ctrl+C to cancel and go back to step 6.
    * You will be prompted for a Github token. Follow the instructions given in the shell.
 
 8. Install Magento 2 by running:
@@ -54,12 +54,29 @@ Install the following before proceeding through installation. This may require a
      ```
      sudo apt-get install dos2unix;
      dos2unix /home/vagrant/bin/reinstall;
+     dos2unix /vagrant/data/magento2/bin/magento;
      ```
      * `reinstall` (Magento **without** sample data) or `reinstall -s` (Magento **with** sample data).
 
  * Via Web Installer
 
    * Please go to the Magento directory within the vagrant box (`cd /vagrant/data/magento2/`) and run `composer install`. Then open 'http://mage2.dev/setup' in your browser and go through the installation process.
+
+Note: If you do not see sample data after running the above command, run the following:
+
+```
+cd /vagrant/data/magento2;
+mkdir -p var/composer_home;
+cp ~/.composer/auth.json var/composer_home;
+bin/magento sampledata:deploy;
+bin/magento setup:upgrade;
+```
+
+Note: If you have issues with images not displaying on the site, run the following:
+```
+cd /vagrant/data/magento2;
+bin/magento setup:static-content:deploy
+```
 
 #### Updating
 1. From the host machine run `git pull && git submodule update --init && vagrant provision`.
