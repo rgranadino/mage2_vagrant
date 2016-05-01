@@ -4,9 +4,17 @@ A simple way to get magento2 up and running. It consists of a Debian Wheezy box 
 The Magento 2 repository is a git submodule and can be edited/explored from the host machine. It is accessed by the guest via shared directories.
 
 ### Usage
+#### Prerequisites
+Install the following before proceeding through installation. This may require a restart after installing all software. 
+
+* Vagrant: https://www.vagrantup.com/downloads.html
+* VirtualBox: https://www.virtualbox.org/wiki/Downloads
+* Git Bash (Windows users): https://git-scm.com/downloads
+* Github account: https://github.com/
+
 #### Installation
 1. Clone this repository: `git clone --recursive https://github.com/rgranadino/mage2_vagrant.git`
-2. Navigate into the repository via `cd`
+2. Navigate into the repository via `cd mage2_vagrant`
 2. **IMPORTANT**: If you cloned the repository without the *--recursive* param, you need to initialize the required submodules: `git submodule update --init --recursive`
 3. Start up virtual machine: `vagrant up`
 4. Point a host name to 192.168.56.10 in /etc/hosts `echo '192.168.56.10 mage2.dev' >> /etc/hosts`
@@ -15,30 +23,60 @@ The Magento 2 repository is a git submodule and can be edited/explored from the 
 6. Add your Magento Connect authentication credentials to the global composer auth.json:
 
   * Open or create the file `~/.composer/auth.json`
-  * Add the Magento Connect authentication credentials (if you don't have any, please check [here](http://devdocs.magento.com/guides/v2.0/install-gde/prereq/connect-auth.html) on how to create them):
+  * Add the Magento Connect authentication credentials (if you have not already, follow this guide to [create your Magento Connect authentication keys](http://devdocs.magento.com/guides/v2.0/install-gde/prereq/connect-auth.html)):
 
-  ```json
-  {
-      "http-basic": {
-          "repo.magento.com": {
-              "username": "<public key>",
-              "password": "<private key>"
-          }
-      }
-  }
-  ```
+    ```json
+    {
+        "http-basic": {
+            "repo.magento.com": {
+                "username": "<public key>",
+                "password": "<private key>"
+            }
+        }
+    }
+    ```
   
  * Or you can use the composer config command: `composer.phar global config http-basic.repo.magento.com <public_key> <private_key>`
 
-7. Install Magento 2 by running:
+7. Run composer
+   ```bash
+   cd /vagrant/data/magento2; # This is the document root
+   composer install -v;
+   ```
+   * If you did not set your ~/.composer/auth.json file, you will be prompted for credentials to repo.magento.com. Hit ctrl+C to cancel and go back to step 6.
+   * You will be prompted for a Github token. Follow the instructions given in the shell.
+
+8. Install Magento 2 by running:
 
  * Via CLI (recommended)
-
-   * `reinstall` (Magento **without** sample data) or `reinstall -s` (Magento **with** sample data).
+   
+   * If on Windows, you will need to run the following in order for the reinstall command to work. If you do not, you will see an error like `-bash: /home/vagrant/bin/reinstall: /bin/bash^M: bad interpreter: No such file or directory`
+     ```
+     sudo apt-get install dos2unix;
+     dos2unix /home/vagrant/bin/reinstall;
+     dos2unix /vagrant/data/magento2/bin/magento;
+     ```
+     * `reinstall` (Magento **without** sample data) or `reinstall -s` (Magento **with** sample data).
 
  * Via Web Installer
 
    * Please go to the Magento directory within the vagrant box (`cd /vagrant/data/magento2/`) and run `composer install`. Then open 'http://mage2.dev/setup' in your browser and go through the installation process.
+
+Note: If you do not see sample data after running the above command, run the following:
+
+```
+cd /vagrant/data/magento2;
+mkdir -p var/composer_home;
+cp ~/.composer/auth.json var/composer_home;
+bin/magento sampledata:deploy;
+bin/magento setup:upgrade;
+```
+
+Note: If you have issues with images not displaying on the site, run the following:
+```
+cd /vagrant/data/magento2;
+bin/magento setup:static-content:deploy
+```
 
 #### Updating
 1. From the host machine run `git pull && git submodule update --init && vagrant provision`.
