@@ -39,6 +39,7 @@ Vagrant.configure("2") do |config|
   # information on available options.
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--cpus", "4"]
   end
 
   if Vagrant::Util::Platform.windows?
