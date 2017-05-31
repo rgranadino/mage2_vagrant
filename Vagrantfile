@@ -14,6 +14,9 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "mage2.dev"
   config.ssh.forward_agent = "true"
 
+  # Removes stdin: is not a tty
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+  
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.network :private_network, ip: "192.168.56.10"
